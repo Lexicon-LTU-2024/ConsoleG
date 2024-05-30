@@ -11,6 +11,15 @@
         Width = width;
         Height = height;
 
-        cells = new Cell[width, height];
+        cells = new Cell[height, width];
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                cells[y, x] = new Cell();
+            }
+
+        }
     }
 }
