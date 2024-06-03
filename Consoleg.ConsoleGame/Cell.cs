@@ -1,6 +1,6 @@
 ﻿internal class Cell
 {
-    public string Symbol => ".";
+    public string Symbol => ". ";
     public ConsoleColor Color { get; }
 
     public Cell()
