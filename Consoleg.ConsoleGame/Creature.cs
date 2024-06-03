@@ -1,6 +1,7 @@
 ﻿internal class Creature : IDrawable
 {
-    public Cell Cell { get; }
+    //ToDo validate set
+    public Cell Cell { get; set; }
     public string Symbol { get; }
     public ConsoleColor Color { get; protected set; } = ConsoleColor.Green;
     public Creature(Cell cell, string symbol)
