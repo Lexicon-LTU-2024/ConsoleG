@@ -8,6 +8,8 @@ internal class Map
     public int Width { get; }
     public int Height { get; }
 
+    public List<Creature> Creatures { get; } = new List<Creature>();
+
 
     public Map(int width, int height)
     {
