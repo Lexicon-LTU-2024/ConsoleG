@@ -3,8 +3,8 @@
 
 internal class Game
 {
-    private Map map = null!;
-    private Player player = null!;
+    private Map _map = null!;
+    private Player _player = null!;
 
     public Game()
     {
@@ -41,7 +41,7 @@ internal class Game
     private void Initialize()
     {
         //ToDo: Read from config
-        map = new Map(width: 10, height: 10);
-        player = new Player();
+        _map = new Map(width: 10, height: 10);
+        _player = new Player();
     }
 }

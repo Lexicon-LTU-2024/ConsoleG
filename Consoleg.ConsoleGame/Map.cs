@@ -1,6 +1,6 @@
 ﻿internal class Map
 {
-    private Cell[,] cells;
+    private Cell[,] _cells;
     public int Width { get; }
     public int Height { get; }
 
@@ -11,13 +11,13 @@
         Width = width;
         Height = height;
 
-        cells = new Cell[height, width];
+        _cells = new Cell[height, width];
 
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                cells[y, x] = new Cell();
+                _cells[y, x] = new Cell();
             }
 
         }
