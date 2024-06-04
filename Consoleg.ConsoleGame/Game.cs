@@ -78,20 +78,10 @@ internal class Game
         {
             for (int x = 0; x < _map.Width; x++)
             {
-               
-                Cell? cell = _map.GetCell(y, x);
+                Cell? cell =  _map.GetCell(y, x);
                 ArgumentNullException.ThrowIfNull(cell, nameof(cell));
 
-                IDrawable drawable = cell;
-
-                foreach (Creature creature in _map.Creatures)
-                {
-                    if (creature.Cell == drawable)
-                    {
-                        drawable = creature;
-                    }
-                }
-
+                IDrawable drawable = _map.Creatures.CreatureAtExtension(cell);
                 Console.ForegroundColor = drawable.Color;
                 Console.Write(drawable.Symbol);
             }
