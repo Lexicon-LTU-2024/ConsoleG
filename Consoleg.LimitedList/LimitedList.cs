@@ -1,6 +1,8 @@
-﻿namespace Consoleg.LimitedList
+﻿using System.Collections;
+
+namespace Consoleg.LimitedList
 {
-    public class LimitedList<T> 
+    public class LimitedList<T> : IEnumerable<T>
     {
         private readonly int _capacity;
         private List<T> _list;
@@ -22,5 +24,13 @@
             _list.Add(item); return true;
 
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _list.GetEnumerator();   
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+       
     }
 }
