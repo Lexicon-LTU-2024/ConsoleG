@@ -1,9 +1,13 @@
-﻿internal class Creature : IDrawable
+﻿using System.Diagnostics.CodeAnalysis;
+
+internal class Creature : IDrawable
 {
     private Cell _cell;
     public Cell Cell 
     {
         get => _cell;
+
+        [MemberNotNull(nameof(_cell))]
         set
         {
             ArgumentNullException.ThrowIfNull(value, nameof(value));
