@@ -1,8 +1,5 @@
-﻿
-
-
-
-using Consoleg.ConsoleGame;
+﻿using Consoleg.ConsoleGame.Extensions;
+using Consoleg.ConsoleGame.UserInterface;
 
 internal class Game
 {
