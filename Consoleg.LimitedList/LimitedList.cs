@@ -5,7 +5,7 @@ namespace Consoleg.LimitedList
     public class LimitedList<T> : IEnumerable<T>
     {
         private readonly int _capacity;
-        private List<T> _list;
+        protected List<T> _list;
 
         public int Count => _list.Count;
         public bool IsFull => _capacity <= Count;
@@ -16,7 +16,7 @@ namespace Consoleg.LimitedList
             _list = new List<T>(_capacity);
         }
 
-        public bool Add(T item)
+        public virtual bool Add(T item)
         {
             ArgumentNullException.ThrowIfNull(item, "item");
 
