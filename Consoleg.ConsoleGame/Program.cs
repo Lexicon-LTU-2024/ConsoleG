@@ -1,9 +1,10 @@
-﻿using Consoleg.LimitedList;
+﻿using Consoleg.ConsoleGame;
+using Consoleg.LimitedList;
 
-var li = new LimitedList<int>(10);
-li.Add(1);
-li.Add(1);
-li.Add(1);
+var li = new LimitedList<SomeDel>(10);
+li.Add(Console.WriteLine);
+//li.Add(1);
+//li.Add(1);
 
 var str = "1234567890";
 
