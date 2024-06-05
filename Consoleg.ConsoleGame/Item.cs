@@ -20,5 +20,8 @@ namespace Consoleg.ConsoleGame
         }
 
         public override string ToString() => _name;
+
+        public static Item Coin() => new Item("c ", ConsoleColor.Yellow, "coin");
+        public static Item Stone() => new Item("s ", ConsoleColor.Gray, "stone");
     }
 }

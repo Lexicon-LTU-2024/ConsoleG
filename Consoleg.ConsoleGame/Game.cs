@@ -1,4 +1,5 @@
-﻿using Consoleg.ConsoleGame.Extensions;
+﻿using Consoleg.ConsoleGame;
+using Consoleg.ConsoleGame.Extensions;
 using Consoleg.ConsoleGame.UserInterface;
 
 internal class Game
@@ -82,6 +83,10 @@ internal class Game
         Cell? playerCell = _map.GetCell(0, 0);
         _player = new Player(playerCell!);
         _map.Creatures.Add(_player);
+
+        _map.GetCell(2, 5)?.Items.Add(Item.Coin());
+        _map.GetCell(5, 4)?.Items.Add(Item.Coin());
+        _map.GetCell(6, 1)?.Items.Add(Item.Stone());
         
     }
 }
