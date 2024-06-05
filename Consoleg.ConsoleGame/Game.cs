@@ -58,7 +58,16 @@ internal class Game
             case ConsoleKey.RightArrow:
                 Move(Direction.East);
                 break;
+            case ConsoleKey.P :
+                PickUp();
+                break;
+
         }
+    }
+
+    private void PickUp()
+    {
+        
     }
 
     private void Move(Position movement)
