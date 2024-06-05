@@ -8,9 +8,9 @@ namespace Consoleg.ConsoleGame.Extensions
 {
     internal static class MapExtensions
     {
-        public static IDrawable CreatureAtExtension(this List<Creature> creatures, Cell cell)
+        public static IDrawable? CreatureAtExtension(this List<Creature> creatures, Cell cell)
         {
-            IDrawable result = cell;
+            IDrawable? result = null;
 
             foreach (Creature creature in creatures)
             {

@@ -18,7 +18,9 @@ namespace Consoleg.ConsoleGame.UserInterface
                     Cell? cell = map.GetCell(y, x);
                     ArgumentNullException.ThrowIfNull(cell, nameof(cell));
 
-                    IDrawable drawable = map.Creatures.CreatureAtExtension(cell);
+                    IDrawable drawable = map.Creatures.CreatureAtExtension(cell)
+                                                                            ?? cell.Items.FirstOrDefault() as IDrawable
+                                                                            ?? cell;
                     Console.ForegroundColor = drawable.Color;
                     Console.Write(drawable.Symbol);
                 }
