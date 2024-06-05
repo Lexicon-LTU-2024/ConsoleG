@@ -67,7 +67,22 @@ internal class Game
 
     private void PickUp()
     {
-        
+        if (_player.BackPack.IsFull)
+        {
+            Console.WriteLine("Backpack is full");
+            return;
+        }
+
+        var items = _player.Cell.Items;
+        var item = _player.Cell.Items.FirstOrDefault();
+
+        if (item is null) return;
+
+        if (_player.BackPack.Add(item))
+        {
+            Console.WriteLine($"Player pick up {item}");
+            items.Remove(item);
+        }
     }
 
     private void Move(Position movement)

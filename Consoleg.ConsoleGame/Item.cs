@@ -14,6 +14,7 @@ namespace Consoleg.ConsoleGame
 
         public Item(string symbol, ConsoleColor color, string name)
         {
+            //Validate
             Symbol = symbol;
             Color = color;
             _name = name;
