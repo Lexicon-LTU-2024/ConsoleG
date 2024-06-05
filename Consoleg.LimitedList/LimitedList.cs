@@ -34,7 +34,7 @@ namespace Consoleg.LimitedList
             } 
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+       IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
        
     }
 }
