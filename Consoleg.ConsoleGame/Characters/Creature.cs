@@ -16,6 +16,7 @@ internal class Creature : IDrawable
     }
     public string Symbol { get; }
     public ConsoleColor Color { get; protected set; } = ConsoleColor.Green;
+    public int Health { get; } = 100;
     public Creature(Cell cell, string symbol)
     {
         Cell = cell ?? throw new ArgumentNullException(nameof(cell));
