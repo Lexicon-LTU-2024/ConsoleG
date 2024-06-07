@@ -17,7 +17,7 @@ namespace Consoleg.ConsoleGame.UserInterface
 
         internal static void PrintLog()
         {
-            messageLog.Print(message => Console.WriteLine(message));
+            messageLog.Print(message => Console.WriteLine(message + new string(' ', Console.WindowWidth - message.Length)));
         }
 
         internal static void Draw(IMap map)
@@ -43,5 +43,10 @@ namespace Consoleg.ConsoleGame.UserInterface
 
         internal static ConsoleKey GetKey() => Console.ReadKey(intercept: true).Key;
 
+        internal static void Clear()
+        {
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(0, 0);
+        }
     }
 }
