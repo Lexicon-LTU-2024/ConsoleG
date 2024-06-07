@@ -10,6 +10,12 @@ namespace Consoleg.LimitedList
         public int Count => _list.Count;
         public bool IsFull => _capacity <= Count;
 
+        public T this[int index] => _list[index];
+        //{
+        //    get => _list[index];
+        //    set => _list[index] = value;
+        //}
+
         public LimitedList(int capacity)
         {
             _capacity = Math.Max(capacity, 2);

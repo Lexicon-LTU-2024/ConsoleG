@@ -4,6 +4,7 @@ using Consoleg.ConsoleGame.UserInterface;
 
 internal class Game
 {
+    private Dictionary<ConsoleKey, Action> actionMeny;
     private Map _map = null!;
     private Player _player = null!;
 
@@ -58,10 +59,27 @@ internal class Game
             case ConsoleKey.RightArrow:
                 Move(Direction.East);
                 break;
-            case ConsoleKey.P :
-                PickUp();
-                break;
+            //case ConsoleKey.P:
+            //    PickUp();
+            //    break;
+            //case ConsoleKey.I:
+            //    Inventory();
+            //    break;
 
+        }
+
+        if (actionMeny.ContainsKey(keyPressed))
+        {
+            actionMeny[keyPressed]?.Invoke();
+        }
+
+    }
+
+    private void Inventory()
+    {
+        for (int i = 0; i < _player.BackPack.Count; i++)
+        {
+            ConsoleUI.AddMessage($"{i + 1}: {_player.BackPack[i]}");
         }
     }
 
@@ -104,6 +122,7 @@ internal class Game
 
     private void Initialize()
     {
+        CreateActionMeny();
         //ToDo: Read from config
         _map = new Map(width: 10, height: 10);
         Cell? playerCell = _map.GetCell(0, 0);
@@ -113,6 +132,17 @@ internal class Game
         _map.GetCell(2, 5)?.Items.Add(Item.Coin());
         _map.GetCell(5, 4)?.Items.Add(Item.Coin());
         _map.GetCell(6, 1)?.Items.Add(Item.Stone());
+        _map.GetCell(6, 1)?.Items.Add(Item.Stone());
+        _map.GetCell(1, 3)?.Items.Add(Item.Stone());
         
+    }
+
+    private void CreateActionMeny()
+    {
+        actionMeny = new Dictionary<ConsoleKey, Action>()
+        {
+            { ConsoleKey.P, PickUp },
+            { ConsoleKey.I, Inventory }
+        };
     }
 }
