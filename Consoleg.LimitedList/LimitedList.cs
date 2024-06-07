@@ -25,6 +25,13 @@ namespace Consoleg.LimitedList
 
         }
 
+        public void Print(Action<T> action)
+        {
+            //_list.ForEach(action);
+           // _list.ForEach(x => action(x));
+            _list.ForEach(x => action?.Invoke(x));
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             foreach (var item in _list)

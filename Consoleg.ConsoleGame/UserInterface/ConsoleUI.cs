@@ -1,14 +1,25 @@
 ﻿using Consoleg.ConsoleGame.Extensions;
+using Consoleg.LimitedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Consoleg.ConsoleGame.UserInterface
 {
     internal class ConsoleUI
     {
+        private static MessageLog<string> messageLog = new(6);
+
+        internal static void AddMessage(string message) => messageLog.Add(message);
+
+        internal static void PrintLog()
+        {
+            messageLog.Print(message => Console.WriteLine(message));
+        }
+
         internal static void Draw(IMap map)
         {
             for (int y = 0; y < map.Height; y++)
