@@ -4,6 +4,8 @@ internal class Creature : IDrawable
 {
     private Cell _cell;
     private int _health;
+    private ConsoleColor _color;
+
     public Cell Cell 
     {
         get => _cell;
@@ -15,6 +17,8 @@ internal class Creature : IDrawable
             _cell = value;
         }
     }
+
+    public string Name => GetType().Name;
     public string Symbol { get; }
     public int MaxHealth { get; }
 
@@ -29,7 +33,14 @@ internal class Creature : IDrawable
 
     public int Damage { get; protected set; }
 
-    public ConsoleColor Color { get; protected set; } = ConsoleColor.Green;
+    public static Action<string>? AddToLog { get; set; }
+
+    public ConsoleColor Color 
+    { 
+        get => IsDead ? ConsoleColor.Gray : _color;
+        protected set => _color = value;
+
+    } 
     public Creature(Cell cell, string symbol, int maxHealth, int damage = 50)
     {
         Cell = cell ?? throw new ArgumentNullException(nameof(cell));
@@ -43,7 +54,25 @@ internal class Creature : IDrawable
         MaxHealth = maxHealth;
         Health = maxHealth;
         Damage = damage;
+        Color = ConsoleColor.Green;
     }
+
+    public void Attack(Creature target)
+    {
+        if (target.IsDead || this.IsDead) return;
+
+        var attacker = this.Name;
+
+        target.Health -= this.Damage;
+
+        AddToLog?.Invoke($"The {attacker} attacks the {target.Name} for {this.Damage}");
+
+        if (target.IsDead)
+            AddToLog?.Invoke($"The {target.Name} is dead");
+
+    }
+
+    
 
 }
 

@@ -1,12 +1,14 @@
 ﻿using Consoleg.ConsoleGame;
 using Consoleg.ConsoleGame.Extensions;
 using Consoleg.ConsoleGame.UserInterface;
+using System.Diagnostics;
 
 internal class Game
 {
     private Dictionary<ConsoleKey, Action> actionMeny = null!;
     private Map _map = null!;
     private Player _player = null!;
+    private bool gameInProgress;
 
     public Game()
     {
@@ -20,7 +22,7 @@ internal class Game
 
     private void Play()
     {
-        bool gameInProgress = true;
+        gameInProgress = true;
 
         do
         {
@@ -107,8 +109,20 @@ internal class Game
     {
         var newPosition = _player.Cell.Position + movement;
         var newCell = _map.GetCell(newPosition);
+
+
         if (newCell is not null)
         {
+            Creature? opponent = _map.CreatureAt(newCell);
+            if(opponent is not null)
+            {
+                _player.Attack(opponent);
+                opponent.Attack(_player);
+            }
+
+            gameInProgress = !_player.IsDead;
+
+
             _player.Cell = newCell;
             if (newCell.Items.Any())
                 ConsoleUI.AddMessage($"You see: {string.Join(", ", newCell.Items)}");
@@ -119,7 +133,7 @@ internal class Game
     {
         ConsoleUI.Clear();
         ConsoleUI.Draw(_map);
-        ConsoleUI.PrintStats($"Health: {_player.Health}, Enemys: {_map.Creatures.Count -1}");
+        ConsoleUI.PrintStats($"Health: {_player.Health}, Enemys: {_map.Creatures.Where(c => !c.IsDead).Count() -1}   ");
         ConsoleUI.PrintLog();
     }
 
@@ -134,10 +148,10 @@ internal class Game
 
         var r = new Random();
 
-        _map.GetCell(2, 2).Items.Add(Item.Coin());
-        _map.GetCell(2, 2).Items.Add(Item.Coin());
-        _map.GetCell(2, 2).Items.Add(Item.Stone());
-        _map.GetCell(2, 2).Items.Add(Item.Coin());
+        //_map.GetCell(2, 2).Items.Add(Item.Coin());
+        //_map.GetCell(2, 2).Items.Add(Item.Coin());
+        //_map.GetCell(2, 2).Items.Add(Item.Stone());
+        //_map.GetCell(2, 2).Items.Add(Item.Coin());
 
         RCell().Items.Add(Item.Coin());
         RCell().Items.Add(Item.Coin());
@@ -151,6 +165,16 @@ internal class Game
         _map.Place(new Troll(RCell()));
         _map.Place(new Goblin(RCell()));
         _map.Place(new Goblin(RCell()));
+
+        //_map.Creatures.ForEach(c =>
+        //{
+          
+        //    c.AddToLog = ConsoleUI.AddMessage;
+        //    c.AddToLog += m => Debug.WriteLine(m);
+        //});
+
+        Creature.AddToLog = ConsoleUI.AddMessage;
+       // Creature.AddToLog += Console.WriteLine; 
 
         Cell RCell()
         {
