@@ -25,8 +25,12 @@ internal class Creature : IDrawable
         set => _health = value >= MaxHealth ? MaxHealth : value;
     }
 
+    public bool IsDead => _health <= 0;
+
+    public int Damage { get; protected set; }
+
     public ConsoleColor Color { get; protected set; } = ConsoleColor.Green;
-    public Creature(Cell cell, string symbol, int maxHealth)
+    public Creature(Cell cell, string symbol, int maxHealth, int damage = 50)
     {
         Cell = cell ?? throw new ArgumentNullException(nameof(cell));
       
@@ -37,6 +41,7 @@ internal class Creature : IDrawable
 
         Symbol = symbol;
         MaxHealth = maxHealth;
+        Damage = damage;
     }
 
 }
