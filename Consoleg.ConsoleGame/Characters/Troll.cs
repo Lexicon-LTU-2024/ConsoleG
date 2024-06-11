@@ -1,8 +1,7 @@
 ﻿internal class Troll : Creature
 {
-    public Troll(Cell cell) : base(cell, "T ", 120)
+    public Troll(Cell cell) : base(cell, "T ", 120, 30)
     {
-        Damage = 30;
         Color = ConsoleColor.DarkYellow;
     }
 }

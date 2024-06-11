@@ -134,6 +134,8 @@ internal class Game
         _map.GetCell(6, 1)?.Items.Add(Item.Stone());
         _map.GetCell(6, 1)?.Items.Add(Item.Stone());
         _map.GetCell(1, 3)?.Items.Add(Item.Stone());
+
+        _map.Place(new Orc(_map.GetCell(3, 3)!));
         
     }
 
