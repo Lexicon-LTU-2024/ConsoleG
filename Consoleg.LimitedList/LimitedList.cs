@@ -48,6 +48,7 @@ namespace Consoleg.LimitedList
         }
 
        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-       
+
+       public bool Remove(T item) => _list.Remove(item);
     }
 }

@@ -4,7 +4,7 @@ using Consoleg.ConsoleGame.UserInterface;
 
 internal class Game
 {
-    private Dictionary<ConsoleKey, Action> actionMeny;
+    private Dictionary<ConsoleKey, Action> actionMeny = null!;
     private Map _map = null!;
     private Player _player = null!;
 
@@ -114,7 +114,7 @@ internal class Game
     {
         ConsoleUI.Clear();
         ConsoleUI.Draw(_map);
-        ConsoleUI.PrintStats($"Health: {_player.Health}");
+        ConsoleUI.PrintStats($"Health: {_player.Health}, Enemys: {_map.Creatures.Count -1}");
         ConsoleUI.PrintLog();
     }
 
@@ -160,7 +160,22 @@ internal class Game
         actionMeny = new Dictionary<ConsoleKey, Action>()
         {
             { ConsoleKey.P, PickUp },
-            { ConsoleKey.I, Inventory }
+            { ConsoleKey.I, Inventory },
+            {ConsoleKey.D, Drop }
         };
+    }
+
+    private void Drop()
+    {
+        var item = _player.BackPack.FirstOrDefault();
+        if (item != null && _player.BackPack.Remove(item)) 
+        {
+            _player.Cell.Items.Add(item);
+            ConsoleUI.AddMessage($"Player dropped the {item}");
+        }
+        else
+        {
+            ConsoleUI.AddMessage("Backpack is empty");
+        }
     }
 }

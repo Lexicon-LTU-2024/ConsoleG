@@ -41,6 +41,7 @@ internal class Creature : IDrawable
 
         Symbol = symbol;
         MaxHealth = maxHealth;
+        Health = maxHealth;
         Damage = damage;
     }
 
