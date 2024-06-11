@@ -3,6 +3,7 @@
 internal class Creature : IDrawable
 {
     private Cell _cell;
+    private int _health;
     public Cell Cell 
     {
         get => _cell;
@@ -15,9 +16,17 @@ internal class Creature : IDrawable
         }
     }
     public string Symbol { get; }
+    public int MaxHealth { get; }
+
+
+    public int Health
+    {
+        get => _health;
+        set => _health = value >= MaxHealth ? MaxHealth : value;
+    }
+
     public ConsoleColor Color { get; protected set; } = ConsoleColor.Green;
-    public int Health { get; } = 100;
-    public Creature(Cell cell, string symbol)
+    public Creature(Cell cell, string symbol, int maxHealth)
     {
         Cell = cell ?? throw new ArgumentNullException(nameof(cell));
       
@@ -27,6 +36,7 @@ internal class Creature : IDrawable
         }
 
         Symbol = symbol;
+        MaxHealth = maxHealth;
     }
 
 }
