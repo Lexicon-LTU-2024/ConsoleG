@@ -107,7 +107,12 @@ internal class Game
     {
         var newPosition = _player.Cell.Position + movement;
         var newCell = _map.GetCell(newPosition);
-        if (newCell is not null) _player.Cell = newCell;
+        if (newCell is not null)
+        {
+            _player.Cell = newCell;
+            if (newCell.Items.Any())
+                ConsoleUI.AddMessage($"You see: {string.Join(", ", newCell.Items)}");
+        }
     }
 
     private void Drawmap()
@@ -128,6 +133,11 @@ internal class Game
         _map.Creatures.Add(_player);
 
         var r = new Random();
+
+        _map.GetCell(2, 2).Items.Add(Item.Coin());
+        _map.GetCell(2, 2).Items.Add(Item.Coin());
+        _map.GetCell(2, 2).Items.Add(Item.Stone());
+        _map.GetCell(2, 2).Items.Add(Item.Coin());
 
         RCell().Items.Add(Item.Coin());
         RCell().Items.Add(Item.Coin());
