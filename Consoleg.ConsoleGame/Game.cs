@@ -116,8 +116,6 @@ internal class Game
         ConsoleUI.Draw(_map);
         ConsoleUI.PrintStats($"Health: {_player.Health}");
         ConsoleUI.PrintLog();
-
-        
     }
 
     private void Initialize()
@@ -129,13 +127,31 @@ internal class Game
         _player = new Player(playerCell!);
         _map.Creatures.Add(_player);
 
-        _map.GetCell(2, 5)?.Items.Add(Item.Coin());
-        _map.GetCell(5, 4)?.Items.Add(Item.Coin());
-        _map.GetCell(6, 1)?.Items.Add(Item.Stone());
-        _map.GetCell(6, 1)?.Items.Add(Item.Stone());
-        _map.GetCell(1, 3)?.Items.Add(Item.Stone());
+        var r = new Random();
 
-        _map.Place(new Orc(_map.GetCell(3, 3)!));
+        RCell().Items.Add(Item.Coin());
+        RCell().Items.Add(Item.Coin());
+        RCell().Items.Add(Item.Stone());
+        RCell().Items.Add(Item.Stone());
+        RCell().Items.Add(Item.Stone());
+
+        _map.Place(new Orc(RCell()));
+        _map.Place(new Orc(RCell()));
+        _map.Place(new Troll(RCell()));
+        _map.Place(new Troll(RCell()));
+        _map.Place(new Goblin(RCell()));
+        _map.Place(new Goblin(RCell()));
+
+        Cell RCell()
+        {
+            var width = r.Next(0, _map.Width);
+            var height = r.Next(0, _map.Height);
+
+            var cell = _map.GetCell(height, width);
+            ArgumentNullException.ThrowIfNull(cell, nameof(cell));
+
+            return cell;
+        }
         
     }
 
