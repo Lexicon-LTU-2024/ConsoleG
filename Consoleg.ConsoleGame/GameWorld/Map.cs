@@ -3,7 +3,8 @@ using Consoleg.ConsoleGame.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("ConsoleGame.Tests")]
 internal class Map : IMap
 {
     private Cell[,] _cells;

@@ -16,7 +16,7 @@ namespace Consoleg.ConsoleGame.Extensions
         }
     }
     
-    internal static class ConfigExtensions2
+    public static class ConfigExtensions2
     {
         public static IGetMapSizeFor Implementation { private get; set; } = new GetMapSize();
         public static int GetMapSizeFor2(this IConfiguration config, string key)
