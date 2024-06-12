@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Consoleg.ConsoleGame.Extensions;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +20,24 @@ namespace Consoleg.ConsoleGame
         public int Y { get; set; }
     }
 
-    
+    public interface IMapService
+    {
+        (int width, int height) GetMap();
+    }
+
+    public class MapService : IMapService
+    {
+        private readonly IConfiguration configuration;
+
+        public MapService(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
+        public (int width, int height) GetMap()
+        {
+            return (width: configuration.GetMapSizeFor("x"), height: configuration.GetMapSizeFor("y"));
+        }
+    }
 
 }

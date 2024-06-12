@@ -15,14 +15,18 @@ internal class Map : IMap
     public List<Creature> Creatures { get; } = new List<Creature>();
 
 
-    public Map(/*IConfiguration config*/ IMapSettings mapSettings)
+    public Map(/*IConfiguration config*/ /*IMapSettings mapSettings*/ IMapService mapService)
     {
         //Validate
-       // Width = config.GetMapSizeFor3("x");
-       // Height = config.GetMapSizeFor3("y");
+        // Width = config.GetMapSizeFor3("x");
+        // Height = config.GetMapSizeFor3("y");
 
-        Width = mapSettings.X; 
-        Height = mapSettings.Y;
+        //Width = mapSettings.X; 
+        //Height = mapSettings.Y;
+
+        var (width, height) = mapService.GetMap();
+        Width = width;
+        Height = height;
 
         _cells = new Cell[Height, Width];
 
