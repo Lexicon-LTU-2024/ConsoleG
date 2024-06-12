@@ -6,14 +6,15 @@ using System.Diagnostics;
 internal class Game
 {
     private Dictionary<ConsoleKey, Action> actionMeny = null!;
-    private Map _map = null!;
+    private IMap _map;
     private Player _player = null!;
     private bool gameInProgress;
     private IUI _ui; 
 
-    public Game(IUI ui)
+    public Game(IUI ui, IMap map)
     {
         _ui = ui;
+        _map = map;
     }
 
     internal void Run()
@@ -143,7 +144,7 @@ internal class Game
     {
         CreateActionMeny();
         //ToDo: Read from config
-        _map = new Map(width: 10, height: 10);
+        //_map = new Map(width: 10, height: 10);
         Cell? playerCell = _map.GetCell(0, 0);
         _player = new Player(playerCell!);
         _map.Creatures.Add(_player);
