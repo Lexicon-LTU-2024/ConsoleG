@@ -135,7 +135,7 @@ internal class Game
     private void Drawmap()
     {
         _ui.Clear();
-        _ui.Draw(_map);
+        _ui.Draw();
         _ui.PrintStats($"Health: {_player.Health}, Enemys: {_map.Creatures.Where(c => !c.IsDead).Count() -1}   ");
         _ui.PrintLog();
     }

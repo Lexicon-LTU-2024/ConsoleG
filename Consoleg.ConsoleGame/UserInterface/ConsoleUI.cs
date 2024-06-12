@@ -12,6 +12,12 @@ namespace Consoleg.ConsoleGame.UserInterface
     internal class ConsoleUI : IUI
     {
         private MessageLog<string> messageLog = new(6);
+        private readonly IMap map;
+
+        public ConsoleUI(IMap map)
+        {
+            this.map = map;
+        }
 
         public void AddMessage(string message) => messageLog.Add(message);
 
@@ -20,7 +26,7 @@ namespace Consoleg.ConsoleGame.UserInterface
             messageLog.Print(message => Console.WriteLine(message + new string(' ', Console.WindowWidth - message.Length)));
         }
 
-        public void Draw(IMap map)
+        public void Draw()
         {
             for (int y = 0; y < map.Height; y++)
             {
