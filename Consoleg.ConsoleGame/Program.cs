@@ -29,6 +29,8 @@ var host = Host.CreateDefaultBuilder(args)
                    services.AddSingleton<IConfiguration>(config);
                    services.AddSingleton<IMapSettings>(config.GetSection("game:mapsettings").Get<MapSettings>()!);
                    services.AddSingleton<IMapService, MapService>();
+                   services.AddSingleton<ILimitedList<string>>(new MessageLog<string>(6));
+                   services.AddSingleton<ILimitedList<Item>>(new LimitedList<Item>(3));
                    services.AddSingleton<Game>();
 
                })

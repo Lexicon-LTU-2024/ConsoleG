@@ -2,7 +2,7 @@
 
 namespace Consoleg.LimitedList
 {
-    public class LimitedList<T> : IEnumerable<T>
+    public class LimitedList<T> :  ILimitedList<T>
     {
         private readonly int _capacity;
         protected List<T> _list;
@@ -34,7 +34,7 @@ namespace Consoleg.LimitedList
         public void Print(Action<T> action)
         {
             //_list.ForEach(action);
-           // _list.ForEach(x => action(x));
+            // _list.ForEach(x => action(x));
             _list.ForEach(x => action?.Invoke(x));
         }
 
@@ -44,11 +44,11 @@ namespace Consoleg.LimitedList
             {
                 //
                 yield return item;
-            } 
+            }
         }
 
-       IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-       public bool Remove(T item) => _list.Remove(item);
+        public bool Remove(T item) => _list.Remove(item);
     }
 }
