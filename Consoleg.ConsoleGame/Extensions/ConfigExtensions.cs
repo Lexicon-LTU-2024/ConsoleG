@@ -15,7 +15,21 @@ namespace Consoleg.ConsoleGame.Extensions
             return int.TryParse(section[key], out int result) ? result : 0;
         }
     }
-    
+
+    internal static class ConfigExtensions3
+    {
+        public static Func<IConfiguration, string, int> Implementation { private get; set; } =
+            (config, key) =>
+        {
+            var section = config.GetSection("game:mapsettings");
+            return int.TryParse(section[key], out int result) ? result : 0;
+        };
+        public static int GetMapSizeFor3(this IConfiguration config, string key)
+        {
+            return Implementation(config, key);
+        }
+    }
+
     public static class ConfigExtensions2
     {
         public static IGetMapSizeFor Implementation { private get; set; } = new GetMapSize();
