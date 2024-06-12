@@ -1,4 +1,5 @@
 ﻿
+using Consoleg.ConsoleGame;
 using Consoleg.ConsoleGame.Extensions;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
@@ -14,11 +15,14 @@ internal class Map : IMap
     public List<Creature> Creatures { get; } = new List<Creature>();
 
 
-    public Map(IConfiguration config)
+    public Map(/*IConfiguration config*/ IMapSettings mapSettings)
     {
         //Validate
-        Width = config.GetMapSizeFor3("x");
-        Height = config.GetMapSizeFor3("y");
+       // Width = config.GetMapSizeFor3("x");
+       // Height = config.GetMapSizeFor3("y");
+
+        Width = mapSettings.X; 
+        Height = mapSettings.Y;
 
         _cells = new Cell[Height, Width];
 
