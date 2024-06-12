@@ -1,4 +1,5 @@
 ﻿using Consoleg.ConsoleGame;
+using Consoleg.ConsoleGame.UserInterface;
 using Consoleg.LimitedList;
 
 //var li = new LimitedList<SomeDel>(10);
@@ -19,7 +20,7 @@ using Consoleg.LimitedList;
 //}
 
 
-var game = new Game();
+var game = new Game(new ConsoleUI());
 game.Run();
 
 Console.WriteLine("Game Over");

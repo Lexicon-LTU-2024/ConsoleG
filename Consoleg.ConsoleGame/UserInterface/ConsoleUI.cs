@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Consoleg.ConsoleGame.UserInterface
 {
-    internal class ConsoleUI
+    internal class ConsoleUI : IUI
     {
-        private static MessageLog<string> messageLog = new(6);
+        private MessageLog<string> messageLog = new(6);
 
-        internal static void AddMessage(string message) => messageLog.Add(message);
+        public void AddMessage(string message) => messageLog.Add(message);
 
-        internal static void PrintLog()
+        public void PrintLog()
         {
             messageLog.Print(message => Console.WriteLine(message + new string(' ', Console.WindowWidth - message.Length)));
         }
 
-        internal static void Draw(IMap map)
+        public void Draw(IMap map)
         {
             for (int y = 0; y < map.Height; y++)
             {
@@ -41,15 +41,15 @@ namespace Consoleg.ConsoleGame.UserInterface
             Console.ResetColor();
         }
 
-        internal static ConsoleKey GetKey() => Console.ReadKey(intercept: true).Key;
+        public ConsoleKey GetKey() => Console.ReadKey(intercept: true).Key;
 
-        internal static void Clear()
+        public void Clear()
         {
             Console.CursorVisible = false;
             Console.SetCursorPosition(0, 0);
         }
 
-        internal static void PrintStats(string stats)
+        public void PrintStats(string stats)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(stats);
